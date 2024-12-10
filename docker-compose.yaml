@@ -1,0 +1,24 @@
+version: "3"
+networks:
+  expense:
+volumes:
+  mysql:  # docker volume create mysql
+services:  #like Run command
+  mysql:
+    image: joindevops/mysql:v1 #we push local images to docker hub, we pull from docker hub
+    container_name: mysql # --name mysql
+    volumes:
+    - mysql:/var/lib/mysql # -v mysql:/var/lib/mysql(mount point)
+  backend:
+    image: joindevops/backend:v1 
+    container_name: backend
+    command: sh -c "sleep 5 && node /opt/server/index.js" #we are giving time to backend to create and run
+    depends_on:
+    - mysql
+  frontend:
+    image: joindevops/frontend:v1
+    container_name: frontend
+    ports:
+    - 80:80
+    depends_on:
+    - backend
