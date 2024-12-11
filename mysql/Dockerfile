@@ -1,4 +1,4 @@
-FROM mysql:8.0
+FROM mysql:8.0   
 ENV MYSQL_ROOT_PASSWORD=ExpenseApp@1
 RUN groupadd expense && \
     useradd -g expense expense && \
@@ -8,3 +8,4 @@ USER expense
     # MYSQL_DATABASE=transactions \
     # MYSQL_USER=expense \
     # MYSQL_PASSWORD=ExpenseApp@1
+  #here we used  official MySQL Docker image
